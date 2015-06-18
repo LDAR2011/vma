@@ -14,3 +14,5 @@
 
 // TODO:  在此处引用程序需要的其他头文件
 #include "DCN.h"
+#include "VM_Scheme.h"
+#include <iostream>

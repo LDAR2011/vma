@@ -27,6 +27,9 @@
     <ClInclude Include="DCN.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="VM_Scheme.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
