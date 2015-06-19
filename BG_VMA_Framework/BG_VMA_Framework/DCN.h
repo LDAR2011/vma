@@ -42,10 +42,15 @@ public:
 	int layers;
 	vector<int> arys;
 	vector<int> link_capacitys;
-
+	vector<int> level_start_index;
 
 	//
 	int time;
 	vector<VM_Scheme> schemes;
+	
 
+	DCN() {};
+	~DCN() {};
+
+	DCN(int layers, vector<int>r_arys, vector<int>r_link_capacitys);
 };
