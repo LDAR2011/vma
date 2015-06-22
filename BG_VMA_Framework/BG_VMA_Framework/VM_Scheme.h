@@ -5,16 +5,42 @@
 #pragma once
 
 #include<map>
+
 using namespace std;
 
 class VM_Scheme
 {
 public:
-	int vm_num;
+	
 	map<int, int>vm_map;
+	
 	int arrival_time;
-	int compute_time;
+	int during_time;
 	int expire_time;
+
 	VM_Scheme(){}
 	~VM_Scheme() {}
+
+	VM_Scheme(map<int, int>r_vm_map, int r_arrival_time, int r_during_time)
+	{
+		vm_map = r_vm_map;
+		arrival_time = r_arrival_time;
+		during_time = r_during_time;
+		expire_time = arrival_time + during_time;
+	}
+
+	bool operator < (const VM_Scheme& vm_s)
+	{
+		return this->expire_time < vm_s.expire_time;
+	}
+
+	bool operator > (const VM_Scheme& vm_s)
+	{
+		return this->expire_time > vm_s.expire_time;
+	}
+
+	bool operator == (const VM_Scheme& vm_s)
+	{
+		return this->expire_time == vm_s.expire_time;
+	}
 };

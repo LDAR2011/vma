@@ -14,7 +14,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	arys.push_back(40);
 
 
-
 	vector<int>link_capacitys;
 	link_capacitys.push_back(0);
 	link_capacitys.push_back(32000);

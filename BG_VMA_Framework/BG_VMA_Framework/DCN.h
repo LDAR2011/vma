@@ -5,6 +5,9 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
+#include <hash_set>
+#include <hash_map>
 using namespace std;
 
 #include "VM_Scheme.h"
@@ -53,8 +56,15 @@ public:
 
 	//
 	int time;
-	vector<VM_Scheme> schemes;
-	
+	vector<VM_Scheme> vm_schemes;
+
+	void add_vm_scheme(VM_Scheme vm_scheme);
+	void remove_vm_scheme();
+
+	void occupy_resource(VM_Scheme& vm_scheme);
+	void release_resource(VM_Scheme& vm_scheme);
+
+	void update_resource(VM_Scheme & vm_scheme, bool isOccupy);
 
 	DCN() {};
 	~DCN() {};

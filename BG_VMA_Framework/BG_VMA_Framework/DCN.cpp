@@ -5,6 +5,9 @@ using namespace std;
 
 DCN::DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slots)
 {
+
+	//topo set up
+
 	layers = r_layers;
 
 	assert(layers == r_arys.size());
@@ -27,9 +30,11 @@ DCN::DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slo
 		level_start_index[i + 1] = level_start_index[i] + level_cnt;
 	}
 	
+	/*
 	cout << "node cnt:" << nodeCount << endl;
 	for (int i = 0; i < level_start_index.size(); i++)
 		cout << "level start:" <<level_start_index[i] << endl;
+	*/
 
 	for (int i = 0; i < layers + 1; i ++){
 		for (int j = level_start_index[i]; j < level_start_index[i + 1]; j++){
@@ -43,7 +48,14 @@ DCN::DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slo
 			nodes.push_back(newNode);
 		}
 	}
-	cout << "node size:" << nodes.size() << endl;
+	
+	//cout << "node size:" << nodes.size() << endl;
+
+	//set time
+	time = 0;
+
+	//vm scheme clear up
+	vm_schemes.clear();
 }
 
 
@@ -100,4 +112,46 @@ int DCN::get_rightest_child_id(int id)
 		return -1;
 
 	return get_leftest_child_id(id) + arys[level] - 1;
+}
+
+void DCN::add_vm_scheme(VM_Scheme vm_scheme)
+{
+	vm_schemes.push_back(vm_scheme);
+	//TODO
+	//occupy resource
+	occupy_resource(vm_scheme);
+}
+
+void DCN::remove_vm_scheme()
+{
+	sort(vm_schemes.begin(), vm_schemes.end());
+	reverse(vm_schemes.begin(), vm_schemes.end());
+	//DESC order
+
+	time++;
+
+	while (vm_schemes.end()->expire_time >= time)
+	{
+		//TODO
+		//release resource
+		release_resource(*vm_schemes.end());
+		vm_schemes.pop_back();
+		
+	}
+}
+
+void DCN::occupy_resource(VM_Scheme& vm_scheme)
+{
+	update_resource(vm_scheme, true);
+}
+
+void DCN::release_resource(VM_Scheme& vm_scheme)
+{
+	update_resource(vm_scheme, false);
+}
+
+void DCN::update_resource(VM_Scheme & vm_scheme, bool isOccupy)
+{
+	hash_set<int> node_set;
+	hash_map<int, vector<int>> vm_node_map;
 }

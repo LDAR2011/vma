@@ -1,4 +1,9 @@
+/*
+	author : Lin Du
+	time : 2015-06-22
+*/
 #include "stdafx.h"
+
 
 void test_node_relation(DCN& dcn, int id)
 {

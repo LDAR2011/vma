@@ -1,15 +1,14 @@
-﻿生成启动时间为 2015/6/22 16:02:21。
+﻿生成启动时间为 2015/6/23 0:54:26。
      1>项目“F:\vmagit\vma\BG_VMA_Framework\BG_VMA_Framework\BG_VMA_Framework.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\BG_VMA_Framework.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
          stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\BG_VMA_Framework.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BG_VMA_Framework.cpp DCN.cpp
-         BG_VMA_Framework.cpp
-     1>f:\vmagit\vma\bg_vma_framework\bg_vma_framework\test.h(14): warning C4018: “<”: 有符号/无符号不匹配
-     1>f:\vmagit\vma\bg_vma_framework\bg_vma_framework\test.h(21): warning C4018: “<”: 有符号/无符号不匹配
-         正在生成代码...
-         正在跳过...(未检测到相关更改)
          DCN.cpp
+         BG_VMA_Framework.cpp
+     1>f:\vmagit\vma\bg_vma_framework\bg_vma_framework\test.h(19): warning C4018: “<”: 有符号/无符号不匹配
+     1>f:\vmagit\vma\bg_vma_framework\bg_vma_framework\test.h(26): warning C4018: “<”: 有符号/无符号不匹配
+         正在生成代码...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\vmagit\vma\BG_VMA_Framework\Debug\BG_VMA_Framework.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\vmagit\vma\BG_VMA_Framework\Debug\BG_VMA_Framework.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\vmagit\vma\BG_VMA_Framework\Debug\BG_VMA_Framework.lib" /MACHINE:X86 Debug\BG_VMA_Framework.obj
          Debug\DCN.obj
@@ -19,4 +18,4 @@
 
 生成成功。
 
-已用时间 00:00:00.77
+已用时间 00:00:00.90
