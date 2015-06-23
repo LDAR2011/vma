@@ -117,7 +117,8 @@ int DCN::get_rightest_child_id(int id)
 void DCN::add_vm_scheme(VM_Scheme vm_scheme)
 {
 	vm_schemes.push_back(vm_scheme);
-	//TODO
+
+	//# alternative #
 	//occupy resource
 	occupy_resource(vm_scheme);
 }
@@ -152,6 +153,31 @@ void DCN::release_resource(VM_Scheme& vm_scheme)
 
 void DCN::update_resource(VM_Scheme & vm_scheme, bool isOccupy)
 {
-	hash_set<int> node_set;
-	hash_map<int, vector<int>> vm_node_map;
+	//slot update
+	map<int, int>::iterator it;
+	for (it = vm_scheme.vm_map.begin(); it != vm_scheme.vm_map.end(); it ++)
+	{
+		if (isOccupy) //occupy
+			nodes[it->second].slots--;
+		else //release
+			nodes[it->second].slots++;
+	}
+
+	//uplink update
+	for (it = vm_scheme.uplink_map.begin(); it != vm_scheme.uplink_map.end(); it++)
+	{
+		if (isOccupy) //occupy
+			nodes[it->first].uplink_capacity -= it->second;
+		else //release
+			nodes[it->second].uplink_capacity += it->second;
+	}
+
+	//downlink update
+	for (it = vm_scheme.downlink_map.begin(); it != vm_scheme.downlink_map.end(); it++)
+	{
+		if (isOccupy)
+			nodes[it->first].downlink_capacity -= it->second;
+		else
+			nodes[it->first].downlink_capacity += it->second;
+	}
 }

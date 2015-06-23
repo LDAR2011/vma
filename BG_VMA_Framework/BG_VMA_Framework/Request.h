@@ -5,13 +5,11 @@
 #pragma once
 
 #include <map>
-//#include "DCN.h"
 
 using namespace std;
 
 class Request
 {
 public:
-	int vm_num;
-	//virtual void update_resource(map<int, int>vm_map, DCN& dcn, bool isOccupy) = 0;
+	int N;
 };

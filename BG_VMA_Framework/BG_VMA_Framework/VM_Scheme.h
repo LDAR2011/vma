@@ -12,8 +12,16 @@ class VM_Scheme
 {
 public:
 	
+	//vm id --> node id
 	map<int, int>vm_map;
+
+	//node id --> uplink demand
+	map<int, int>uplink_map;
 	
+	//node id --> downlink demand 
+	map<int, int>downlink_map;
+
+
 	int arrival_time;
 	int during_time;
 	int expire_time;
