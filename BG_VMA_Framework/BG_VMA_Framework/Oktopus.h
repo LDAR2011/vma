@@ -4,6 +4,7 @@
 */
 #include "VM_Scheme.h"
 #include "DCN.h"
+#include "handle_history.h"
 
 class VC_Request
 {
@@ -44,7 +45,13 @@ class Oktopus_Handler
 
 public :
 
-	Oktopus_Handler(){}
+	Handle_history handle_history;
+
+	Oktopus_Handler()
+	{
+		handle_history = Handle_history();
+	}
+
 	~Oktopus_Handler() {}
 
 	Oktopus_Handler(int nodeCount);

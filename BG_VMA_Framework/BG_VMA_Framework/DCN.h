@@ -44,6 +44,7 @@ public:
 
 	//topo definition
 	int layers;
+	int slots;
 	vector<int> arys;
 	vector<int> link_capacitys;
 	vector<int> level_start_index;
@@ -70,4 +71,5 @@ public:
 	~DCN() {};
 
 	DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slots);
+
 };

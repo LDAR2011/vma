@@ -9,6 +9,7 @@ DCN::DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slo
 	//topo set up
 
 	layers = r_layers;
+	slots = r_slots;
 
 	assert(layers == r_arys.size());
 	assert(layers + 1 == r_link_capacitys.size());

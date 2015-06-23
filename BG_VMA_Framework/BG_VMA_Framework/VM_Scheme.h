@@ -55,4 +55,11 @@ public:
 	{
 		return this->expire_time == vm_s.expire_time;
 	}
+
+	void set_time(int r_arrival_time, int r_during_time)
+	{
+		arrival_time = r_arrival_time;
+		during_time = r_during_time;
+		expire_time = arrival_time + during_time;
+	}
 };
