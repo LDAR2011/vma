@@ -33,9 +33,6 @@
     <ClInclude Include="test.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Request.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Oktopus.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -48,6 +45,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DCN.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Oktopus.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

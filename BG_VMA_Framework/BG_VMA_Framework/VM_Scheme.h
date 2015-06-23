@@ -12,15 +12,19 @@ class VM_Scheme
 {
 public:
 	
-	//vm id --> node id
+	//vm id --> node id, record each vm's place
 	map<int, int>vm_map;
 
-	//node id --> uplink demand
+	//node id --> slot demand, record how many slots are used on server 'id'
+	map<int, int>node_slot_map;
+
+	//node id --> uplink demand, record how much uplink bw is used on server 'id'
 	map<int, int>uplink_map;
 	
-	//node id --> downlink demand 
+	//node id --> downlink demand, record how much downlink bw is used on server 'id'
 	map<int, int>downlink_map;
 
+	bool isSuccess;
 
 	int arrival_time;
 	int during_time;

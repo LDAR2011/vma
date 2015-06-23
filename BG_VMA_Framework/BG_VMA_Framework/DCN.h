@@ -48,11 +48,11 @@ public:
 	vector<int> link_capacitys;
 	vector<int> level_start_index;
 
-	bool isServer(int id);
-	int get_level(int id);
-	int get_parent_id(int id);
-	int get_leftest_child_id(int id);
-	int get_rightest_child_id(int id);
+	bool isServer(int id) const;
+	int get_level(int id) const;
+	int get_parent_id(int id) const;
+	int get_leftest_child_id(int id) const;
+	int get_rightest_child_id(int id) const;
 
 	//
 	int time;

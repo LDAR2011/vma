@@ -59,14 +59,14 @@ DCN::DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slo
 }
 
 
-bool DCN::isServer(int id)
+bool DCN::isServer(int id) const
 {
 	if (id >= level_start_index[level_start_index.size() - 2])
 		return true;
 	return false;
 }
 
-int DCN::get_level(int id)
+int DCN::get_level(int id) const
 {
 	assert(id >= 0 && id < nodeCount);
 
@@ -83,7 +83,7 @@ int DCN::get_level(int id)
 	return level;
 }
 
-int DCN::get_parent_id(int id)
+int DCN::get_parent_id(int id) const
 {
 	int level = get_level(id);
 
@@ -93,7 +93,7 @@ int DCN::get_parent_id(int id)
 	return level_start_index[level - 1] + (id - level_start_index[level]) / arys[level - 1];
 }
 
-int DCN::get_leftest_child_id(int id)
+int DCN::get_leftest_child_id(int id) const
 {
 	int level = get_level(id);
 
@@ -104,7 +104,7 @@ int DCN::get_leftest_child_id(int id)
 
 }
 
-int DCN::get_rightest_child_id(int id)
+int DCN::get_rightest_child_id(int id) const
 {
 	int level = get_level(id);
 
@@ -155,12 +155,12 @@ void DCN::update_resource(VM_Scheme & vm_scheme, bool isOccupy)
 {
 	//slot update
 	map<int, int>::iterator it;
-	for (it = vm_scheme.vm_map.begin(); it != vm_scheme.vm_map.end(); it ++)
+	for (it = vm_scheme.node_slot_map.begin(); it != vm_scheme.node_slot_map.end(); it ++)
 	{
-		if (isOccupy) //occupy
-			nodes[it->second].slots--;
-		else //release
-			nodes[it->second].slots++;
+		if (isOccupy) // occupy resource
+			nodes[it->first].slots -= it->second;
+		else
+			nodes[it->first].slots += it->second;
 	}
 
 	//uplink update
@@ -169,7 +169,7 @@ void DCN::update_resource(VM_Scheme & vm_scheme, bool isOccupy)
 		if (isOccupy) //occupy
 			nodes[it->first].uplink_capacity -= it->second;
 		else //release
-			nodes[it->second].uplink_capacity += it->second;
+			nodes[it->first].uplink_capacity += it->second;
 	}
 
 	//downlink update

@@ -51,10 +51,12 @@ public :
 
 	vector<int> available_slots;
 
-	int calcSlots(int id, DCN& dcn, VC_Request vc_request);
+	int calcSlots(int id, const DCN& dcn, VC_Request& vc_request);
 
-	VM_Scheme handle_VC_Request(DCN& dcn, VC_Request vc_request);
+	VM_Scheme handle_VC_Request(const DCN& dcn, VC_Request& vc_request);
 
-	VM_Scheme handle_VOC_Request(DCN& dcn, VOC_Request voc_request);
+	VM_Scheme handle_VOC_Request(const DCN& dcn, VOC_Request& voc_request);
+
+	int hoseAlloc(const DCN& dcn, int node_id, VC_Request& vc_request, int m, VM_Scheme& vm_scheme);
 
 };
