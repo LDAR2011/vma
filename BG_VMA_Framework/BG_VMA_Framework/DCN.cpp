@@ -115,28 +115,47 @@ int DCN::get_rightest_child_id(int id) const
 	return get_leftest_child_id(id) + arys[level] - 1;
 }
 
-void DCN::add_vm_scheme(VM_Scheme vm_scheme)
+void DCN::add_vm_scheme(VM_Scheme vm_scheme, ofstream& fout, bool verbose)
 {
 	vm_schemes.push_back(vm_scheme);
 
+	if (verbose) //print some details
+	{
+		fout << "time:" << time << endl;
+		fout << "now schemes:" << endl;
+		for (int i = 0; i < vm_schemes.size(); i++)
+		{
+			fout << "(" << vm_schemes[i].arrival_time << "," << vm_schemes[i].expire_time << ")" << endl;
+		}
+	}
 	//# alternative #
 	//occupy resource
 	occupy_resource(vm_scheme);
 }
 
-void DCN::remove_vm_scheme()
+void DCN::remove_vm_scheme(ofstream& fout, bool verbose)
 {
+	if (vm_schemes.size() == 0)
+	{
+		return;
+	}
+
 	sort(vm_schemes.begin(), vm_schemes.end());
 	reverse(vm_schemes.begin(), vm_schemes.end());
 	//DESC order
 
 	time++;
 
-	while (vm_schemes.end()->expire_time >= time)
+	while (vm_schemes[vm_schemes.size()-1].expire_time <= time)
 	{
-		//TODO
+		
+		if (verbose) //print details
+		{
+			fout << "scheme leave:" << vm_schemes[vm_schemes.size() - 1].arrival_time << endl;
+		}
+
 		//release resource
-		release_resource(*vm_schemes.end());
+		release_resource(vm_schemes[vm_schemes.size() - 1]);
 		vm_schemes.pop_back();
 		
 	}
@@ -180,5 +199,62 @@ void DCN::update_resource(VM_Scheme & vm_scheme, bool isOccupy)
 			nodes[it->first].downlink_capacity -= it->second;
 		else
 			nodes[it->first].downlink_capacity += it->second;
+	}
+}
+
+int DCN::calcslots(int id)
+{
+	if (isServer(id))
+		return nodes[id].slots;
+
+	int leftchild_id = get_leftest_child_id(id);
+	int rightchild_id = get_rightest_child_id(id);
+	nodes[id].slots = 0;
+	for (int i = leftchild_id; i <= rightchild_id; i ++)
+	{
+		nodes[id].slots += calcslots(i);
+	}
+	return nodes[id].slots;
+}
+
+void DCN::record_resource(ofstream& fout)
+{
+	for (int i = 0; i < nodeCount; i ++)
+	{
+		if (!isServer(i))
+		{
+			fout << "(" << i << "," << nodes[i].slots << "," <<
+				nodes[i].uplink_capacity << "," << nodes[i].downlink_capacity << ")::";
+
+			for (int j = get_leftest_child_id(i); j <= get_rightest_child_id(i); j++)
+			{
+				fout << "(" << j << "," << nodes[j].slots << "," <<
+					nodes[j].uplink_capacity << "," << nodes[j].downlink_capacity << ");;";
+			}
+			fout << endl;
+		}
+		else
+			break;
+	}
+}
+
+void DCN::record_resource(ofstream& fout, vector<int>& available_slots)
+{
+	for (int i = 0; i < nodeCount; i++)
+	{
+		if (!isServer(i))
+		{
+			fout << "(" << i << "," << nodes[i].slots << "|" << available_slots[i] <<"," <<
+				nodes[i].uplink_capacity << "," << nodes[i].downlink_capacity << ")::";
+
+			for (int j = get_leftest_child_id(i); j <= get_rightest_child_id(i); j++)
+			{
+				fout << "(" << j << "," << nodes[j].slots << "|" << available_slots[j] << "," <<
+					nodes[j].uplink_capacity << "," << nodes[j].downlink_capacity << ");;";
+			}
+			fout << endl;
+		}
+		else
+			break;
 	}
 }

@@ -58,6 +58,8 @@ public :
 
 	vector<int> available_slots;
 
+	int calc_mv(int kv, int N, int B, int link_capacity);
+
 	int calcSlots(int id, const DCN& dcn, VC_Request& vc_request);
 
 	VM_Scheme handle_VC_Request(const DCN& dcn, VC_Request& vc_request);

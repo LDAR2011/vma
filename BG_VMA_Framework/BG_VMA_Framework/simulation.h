@@ -74,14 +74,21 @@ DCN copy_dcn(const DCN& dcn)
 void test_Oktopus_VC(DCN& dcn, NumGen* vmNumGen, NumGen* bwGen, int looptime, NumGen* timeGen)
 {
 
-	Oktopus_Handler oktopus_handler = Oktopus_Handler();
+	Oktopus_Handler oktopus_handler = Oktopus_Handler(dcn.nodeCount);
 
 	clock_t start, end;
+
+	ofstream fout("test_oktopus.txt");
 
 	for (int i = 0; i < looptime; i ++)
 	{
 		int n = vmNumGen->get_num();
 		int b = bwGen->get_num();
+
+		fout << "i:" << i <<",n:" << n << ",b:" << b << endl;
+		cout << "i:" << i << ",n:" << n << ",b:" << b << endl;
+
+		dcn.calcslots(0);
 
 		VC_Request vc_request = VC_Request(n, b);
 
@@ -97,9 +104,19 @@ void test_Oktopus_VC(DCN& dcn, NumGen* vmNumGen, NumGen* bwGen, int looptime, Nu
 
 		if (vm_scheme.isSuccess)
 		{
-			dcn.add_vm_scheme(vm_scheme);
+			dcn.add_vm_scheme(vm_scheme, fout,true);
 		}
 
-		dcn.remove_vm_scheme();
+		fout << "success:" << vm_scheme.isSuccess << endl;
+		cout << "success:" << vm_scheme.isSuccess << endl;
+	
+		oktopus_handler.handle_history.save_history(vm_scheme.isSuccess,dur,n);
+
+		dcn.record_resource(fout, oktopus_handler.available_slots);
+
+		dcn.remove_vm_scheme(fout, true);
 	}
+	fout.close();
+
+	oktopus_handler.handle_history.save_to_file("result.txt");
 }

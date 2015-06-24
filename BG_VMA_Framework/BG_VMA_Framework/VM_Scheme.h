@@ -11,7 +11,9 @@ using namespace std;
 class VM_Scheme
 {
 public:
-	
+
+	int scheme_id;
+
 	//vm id --> node id, record each vm's place
 	map<int, int>vm_map;
 

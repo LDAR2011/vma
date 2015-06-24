@@ -4,7 +4,8 @@
 */
 #pragma once
 #include <vector>
-
+#include <string>
+#include <fstream>
 using namespace std;
 
 class Handle_history
@@ -35,5 +36,15 @@ public:
 				return i + 1;
 		}
 		return success.size() + 1;
+	}
+
+	void save_to_file(string filename)
+	{
+		ofstream fout(filename);
+		for (int i = 0; i < success.size(); i ++)
+		{
+			fout << i << ", success:" << success[i] << ", time:" << time_used[i] << ", vm_num:" << problem_size[i] << endl;
+		}
+		fout.close();
 	}
 };

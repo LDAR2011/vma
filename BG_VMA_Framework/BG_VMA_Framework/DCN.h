@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <hash_set>
 #include <hash_map>
+#include <fstream>
 using namespace std;
 
 #include "VM_Scheme.h"
@@ -54,13 +55,14 @@ public:
 	int get_parent_id(int id) const;
 	int get_leftest_child_id(int id) const;
 	int get_rightest_child_id(int id) const;
+	int calcslots(int id);
 
 	//
 	int time;
 	vector<VM_Scheme> vm_schemes;
 
-	void add_vm_scheme(VM_Scheme vm_scheme);
-	void remove_vm_scheme();
+	void add_vm_scheme(VM_Scheme vm_scheme, ofstream& fout, bool verbose=false);
+	void remove_vm_scheme(ofstream& fout, bool verbose = false);
 
 	void occupy_resource(VM_Scheme& vm_scheme);
 	void release_resource(VM_Scheme& vm_scheme);
@@ -72,4 +74,7 @@ public:
 
 	DCN(int r_layers, vector<int>r_arys, vector<int>r_link_capacitys, int r_slots);
 
+
+	void record_resource(ofstream& fout);
+	void record_resource(ofstream& fout, vector<int>& available_slots);
 };
